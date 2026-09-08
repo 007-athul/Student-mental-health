@@ -1,4 +1,10 @@
-.venv/
+# Python
 __pycache__/
 *.pyc
-.env
+.venv/
+
+# Generated processed datasets
+data/processed/
+
+# Generated reports
+outputs/reports/
