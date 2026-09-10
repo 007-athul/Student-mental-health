@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MindSense - Tic Tac Toe</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>🎮 Tic Tac Toe</h1>
+
+
+        <!-- PLAYER -->
+
+        <div class="player-setup">
+
+            <div class="player-input">
+
+                <label>Your Name</label>
+
+                <input
+                    type="text"
+                    id="playerName"
+                    placeholder="Enter your name"
+                    value="Player"
+                    maxlength="20">
+
+            </div>
+
+
+            <button id="savePlayer">
+                Save Name
+            </button>
+
+        </div>
+
+
+        <!-- AI DIFFICULTY -->
+
+        <div class="ai-options">
+
+            <label for="aiDifficulty">
+                AI Difficulty
+            </label>
+
+
+            <select id="aiDifficulty">
+
+                <option value="easy">
+                    🟢 Easy
+                </option>
+
+                <option value="medium" selected>
+                    🟡 Medium
+                </option>
+
+                <option value="hard">
+                    🔴 Hard
+                </option>
+
+            </select>
+
+
+            <p>
+                You play as X.
+                MindSense AI plays as O.
+            </p>
+
+        </div>
+
+
+        <!-- TURN -->
+
+        <div class="turn-container">
+
+            <p id="turnText">
+                Player's Turn (X)
+            </p>
+
+        </div>
+
+
+        <!-- BOARD -->
+
+        <div id="board"
+             class="board">
+
+            <button class="cell"
+                    data-index="0"></button>
+
+            <button class="cell"
+                    data-index="1"></button>
+
+            <button class="cell"
+                    data-index="2"></button>
+
+            <button class="cell"
+                    data-index="3"></button>
+
+            <button class="cell"
+                    data-index="4"></button>
+
+            <button class="cell"
+                    data-index="5"></button>
+
+            <button class="cell"
+                    data-index="6"></button>
+
+            <button class="cell"
+                    data-index="7"></button>
+
+            <button class="cell"
+                    data-index="8"></button>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div id="result"
+             class="result">
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <button id="newGame">
+                🔄 New Game
+            </button>
+
+            <button id="resetScores"
+                    class="reset-button">
+
+                Reset Scores
+
+            </button>
+
+        </div>
+
+
+        <!-- SCOREBOARD -->
+
+        <div class="scoreboard">
+
+            <h2>🏆 Scoreboard</h2>
+
+
+            <div class="scores">
+
+
+                <!-- USER -->
+
+                <div class="score-card x-card">
+
+                    <h3 id="scorePlayerX">
+                        Player
+                    </h3>
+
+                    <p id="xWins">
+                        0
+                    </p>
+
+                    <span>
+                        Wins
+                    </span>
+
+                </div>
+
+
+                <!-- DRAWS -->
+
+                <div class="score-card draw-card">
+
+                    <h3>
+                        Draws
+                    </h3>
+
+                    <p id="draws">
+                        0
+                    </p>
+
+                    <span>
+                        Games
+                    </span>
+
+                </div>
+
+
+                <!-- AI -->
+
+                <div class="score-card o-card">
+
+                    <h3 id="scorePlayerO">
+                        MindSense AI
+                    </h3>
+
+                    <p id="oWins">
+                        0
+                    </p>
+
+                    <span>
+                        Wins
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}">
+    </script>
+
+</body>
+
+</html>

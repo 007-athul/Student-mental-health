@@ -1,0 +1,465 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg,
+            #0f2335,
+            #8ff636);
+
+    padding: 20px;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 600px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+
+    text-align: center;
+}
+
+
+h1 {
+    font-size: 42px;
+
+    margin-bottom: 25px;
+
+    color: #333;
+}
+
+
+/* GAME MODE */
+.mode-section { margin-bottom: 22px; }
+.mode-section h2 { font-size: 18px; color: #444; margin-bottom: 12px; }
+.mode-buttons { display: flex; justify-content: center; gap: 10px; }
+.mode-button { flex: 1; padding: 12px 10px; border: 2px solid #ddd; border-radius: 10px; background: #f8f8f8; color: #444; cursor: pointer; font-size: 15px; font-weight: bold; transition: 0.2s; }
+.mode-button:hover { transform: translateY(-2px); }
+.mode-button.active { background: #667eea; color: white; border-color: #667eea; }
+.ai-options { margin: 8px auto 18px; padding: 15px; max-width: 390px; border-radius: 12px; background: #f5f6ff; }
+.ai-options label { display: block; margin-bottom: 7px; font-weight: bold; color: #444; }
+.ai-options select { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; background: white; }
+.ai-options p { margin-top: 9px; color: #777; font-size: 13px; }
+.hidden { display: none !important; }
+
+/* PLAYER SETUP */
+
+.player-setup {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-bottom: 20px;
+}
+
+
+.player-input {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.player-input label {
+    font-weight: bold;
+
+    color: #444;
+}
+
+
+.player-input input {
+    width: 180px;
+
+    padding: 10px;
+
+    border: 2px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.player-input input:focus {
+    border-color: #79e14d;
+}
+
+
+#savePlayers {
+    align-self: end;
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #7ad744;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+#savePlayers:hover {
+    background: #5568d8;
+}
+
+
+/* TURN */
+
+.turn-container {
+    margin: 15px 0;
+}
+
+
+#turnText {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #555;
+}
+
+
+/* BOARD */
+
+.board {
+    width: 330px;
+    height: 330px;
+
+    margin: 20px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    grid-template-rows:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    background: #333;
+
+    border: 8px solid #333;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+}
+
+
+.cell {
+    border: none;
+
+    background: white;
+
+    font-size: 65px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+
+.cell:hover {
+    background: #f1f1f1;
+}
+
+
+.cell.x {
+    color: #667eea;
+}
+
+
+.cell.o {
+    color: #e74c3c;
+}
+
+
+.cell.winner {
+    background: #c8f7c5;
+}
+
+
+/* RESULT */
+
+.result {
+    min-height: 30px;
+
+    margin: 10px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #333;
+}
+
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin: 20px 0;
+}
+
+
+.buttons button {
+    padding: 12px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    background: #7cd732;
+
+    color: white;
+
+    transition: 0.2s;
+}
+
+
+.buttons button:hover {
+    transform: translateY(-2px);
+
+    opacity: 0.9;
+}
+
+
+.buttons .reset-button {
+    background: #e74c3c;
+}
+
+
+/* SCOREBOARD */
+
+.scoreboard {
+    margin-top: 25px;
+}
+
+
+.scoreboard h2 {
+    margin-bottom: 15px;
+
+    color: #333;
+}
+
+
+.scores {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+
+.score-card {
+    flex: 1;
+
+    padding: 15px 8px;
+
+    border-radius: 12px;
+
+    background: #f5f5f5;
+}
+
+
+.score-card h3 {
+    font-size: 16px;
+
+    margin-bottom: 8px;
+
+    color: #444;
+}
+
+
+.score-card p {
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin-bottom: 3px;
+}
+
+
+.score-card span {
+    font-size: 13px;
+
+    color: #777;
+}
+
+
+.x-card {
+    border-top: 5px solid #34d531;
+}
+
+
+.o-card {
+    border-top: 5px solid #e74c3c;
+}
+
+
+.draw-card {
+    border-top: 5px solid #777;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+    .container {
+        padding: 20px;
+    }
+
+
+    h1 {
+        font-size: 34px;
+    }
+
+
+    .board {
+        width: 280px;
+        height: 280px;
+    }
+
+
+    .cell {
+        font-size: 55px;
+    }
+
+
+    .player-setup {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .player-input input {
+        width: 250px;
+    }
+
+
+    #savePlayers {
+        align-self: center;
+    }
+
+
+    .scores {
+        gap: 5px;
+    }
+
+
+    .score-card {
+        padding: 10px 5px;
+    }
+
+
+    .score-card h3 {
+        font-size: 13px;
+    }
+
+
+    .score-card p {
+        font-size: 25px;
+    }
+
+}
+
+/* AI OPTIONS */
+
+.ai-options {
+    max-width: 390px;
+
+    margin: 10px auto 20px;
+
+    padding: 15px;
+
+    background: #f5f5f5;
+
+    border-radius: 12px;
+}
+
+
+.ai-options label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+
+    color: #444;
+}
+
+
+.ai-options select {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 2px solid #ddd;
+
+    border-radius: 8px;
+
+    background: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+
+.ai-options p {
+    margin-top: 8px;
+
+    color: #777;
+
+    font-size: 13px;
+}

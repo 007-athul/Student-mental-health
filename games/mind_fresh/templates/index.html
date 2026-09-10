@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mind-Fresh</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    <div class="app-container">
+
+
+        <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+        <header class="top-header">
+
+            <div class="brand">
+
+                <div class="leaf-logo">
+                    🌿
+                </div>
+
+                <div class="brand-text">
+
+                    <h1>
+                        Mind-Fresh
+                    </h1>
+
+                    <p>
+                        Think of a character. I'll try to guess it!
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORY BUTTONS -->
+
+            <div class="category-buttons">
+
+                <button class="category-btn active" data-theme="c">
+
+                    <span class="category-icon">
+                        ◉
+                    </span>
+
+                    Characters
+
+                </button>
+
+
+                <button class="category-btn" data-theme="a">
+
+                    <span class="category-icon">
+                        ♣
+                    </span>
+
+                    Animals
+
+                </button>
+
+
+                <button class="category-btn" data-theme="o">
+
+                    <span class="category-icon">
+                        ◆
+                    </span>
+
+                    Objects
+
+                </button>
+
+
+                <button class="settings-btn" title="Settings">
+
+                    ⚙
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+         START SCREEN
+    ====================================================== -->
+
+        <section id="startScreen" class="screen active">
+
+            <div class="welcome-card">
+
+                <div class="welcome-leaf">
+                    🌿
+                </div>
+
+                <span class="eyebrow">
+                    MIND-FRESH
+                </span>
+
+                <h2>
+                    Clear your mind.
+                    <br>
+                    Think of someone.
+                </h2>
+
+                <p>
+                    Choose a character, animal, or object.
+                    Mind-Fresh will ask a few questions and
+                    try to discover what you're thinking about.
+                </p>
+
+
+                <button id="startBtn" class="main-button">
+
+                    Start Game
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+         GAME SCREEN
+    ====================================================== -->
+
+        <section id="gameScreen" class="screen">
+
+            <div class="game-panel">
+
+
+                <!-- QUESTION HEADER -->
+
+                <div class="question-header">
+
+                    <div>
+
+                        <span class="question-label">
+                            QUESTION
+                        </span>
+
+                        <span id="questionNumber" class="question-number">
+                            1
+                        </span>
+
+                    </div>
+
+
+                    <div id="progressText" class="progress-text">
+                        0%
+                    </div>
+
+                </div>
+
+
+                <!-- PROGRESS BAR -->
+
+                <div class="progress-track">
+
+                    <div id="progressBar" class="progress-fill"></div>
+
+                </div>
+
+
+
+                <!-- QUESTION AREA -->
+
+                <div class="question-area">
+
+
+                    <!-- MASCOT -->
+
+                    <div class="mascot-container">
+
+                        <div class="mascot-circle">
+
+                            <div class="mascot">
+                                🧞‍♂️
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SPEECH -->
+
+                    <div class="speech-box">
+
+                        <span class="speech-label">
+                            MIND-FRESH ASKS:
+                        </span>
+
+                        <h2 id="questionText">
+                            Loading...
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ANSWERS -->
+
+                <div class="answers-grid">
+
+
+                    <button class="answer-btn yes" data-answer="y">
+
+                        <span class="answer-symbol">
+                            ✓
+                        </span>
+
+                        <span>
+                            Yes
+                        </span>
+
+                    </button>
+
+
+                    <button class="answer-btn no" data-answer="n">
+
+                        <span class="answer-symbol">
+                            ×
+                        </span>
+
+                        <span>
+                            No
+                        </span>
+
+                    </button>
+
+
+                    <button class="answer-btn" data-answer="i">
+
+                        <span class="answer-symbol">
+                            ?
+                        </span>
+
+                        <span>
+                            Don't Know
+                        </span>
+
+                    </button>
+
+
+                    <button class="answer-btn" data-answer="p">
+
+                        <span class="answer-symbol">
+                            ≈
+                        </span>
+
+                        <span>
+                            Probably
+                        </span>
+
+                    </button>
+
+
+                    <button class="answer-btn" data-answer="pn">
+
+                        <span class="answer-symbol">
+                            ≠
+                        </span>
+
+                        <span>
+                            Probably Not
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- CONTROLS -->
+
+                <div class="game-controls">
+
+                    <button id="backBtn" class="control-button">
+
+                        ←
+                        <span>
+                            Back
+                        </span>
+
+                    </button>
+
+
+                    <button id="restartBtn" class="control-button">
+
+                        ↻
+                        <span>
+                            Restart
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+         RESULT SCREEN
+    ====================================================== -->
+
+        <section id="resultScreen" class="screen">
+
+            <div class="result-panel">
+
+
+                <span class="eyebrow">
+                    MIND-FRESH RESULT
+                </span>
+
+
+                <h2>
+                    I think you were thinking of...
+                </h2>
+
+
+
+                <!-- IMAGE -->
+
+                <div id="guessImageContainer" class="result-image-container">
+
+                    <img id="guessImage" src="" alt="Guessed character">
+
+                </div>
+
+
+
+                <!-- NAME -->
+
+                <h1 id="guessName">
+                    Character
+                </h1>
+
+
+                <!-- DESCRIPTION -->
+
+                <p id="guessDescription" class="result-description">
+                </p>
+
+
+                <!-- PSEUDO -->
+
+                <div id="guessPseudo" class="guess-pseudo">
+                </div>
+
+
+
+                <!-- STATS -->
+
+                <div class="result-stats">
+
+                    <div class="result-stat">
+
+                        <span>
+                            QUESTIONS
+                        </span>
+
+                        <strong id="totalQuestions">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-stat">
+
+                        <span>
+                            PROGRESS
+                        </span>
+
+                        <strong>
+                            <span id="progressValue">
+                                0
+                            </span>%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="result-buttons">
+
+                    <button id="correctBtn" class="main-button">
+
+                        ✓
+                        That's right!
+
+                    </button>
+
+
+                    <button id="tryAgainBtn" class="outline-button">
+
+                        ↻
+                        Try Again
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+         ERROR
+    ====================================================== -->
+
+        <div id="errorMessage" class="error-message">
+        </div>
+
+
+
+        <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+        <footer>
+
+            <div>
+                🌿
+                <span>
+                    A fresher mind. A brighter you.
+                </span>
+            </div>
+
+            <div>
+                Built with curiosity
+                <span class="heart">
+                    ♥
+                </span>
+            </div>
+
+        </footer>
+
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+
+</html>
