@@ -10,7 +10,7 @@ RAW_DATA_DIR = ROOT_DIR / "data" / "raw"
 
 MAIN_DATASET = (
     RAW_DATA_DIR /
-    "students_mental_health_synthetic_v2.csv"
+    "students_mental_health_survey.csv"
 )
 
 SURVEY_DATASET = (
