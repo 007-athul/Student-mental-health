@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relaxing Tetris</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="app">
+        <section class="game-card">
+            <div class="topbar">
+                <div>
+                    <h1>Tetris</h1>
+                    <p>Relax, play, and beat your high score.</p>
+                </div>
+                <button id="restartBtn" class="secondary">Restart</button>
+            </div>
+
+            <div class="layout">
+                <div class="board-wrap">
+                    <canvas id="board" width="300" height="600"></canvas>
+                    <div id="overlay" class="overlay">
+                        <div class="overlay-box">
+                            <h2 id="overlayTitle">Tetris</h2>
+                            <p id="overlayText">Enter your name to start.</p>
+                            <div id="nameArea">
+                                <input id="playerName" maxlength="20" placeholder="Your name">
+                                <button id="startBtn">Start Game</button>
+                            </div>
+                            <button id="continueBtn" class="hidden">Continue</button>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="panel">
+                    <div class="stat">
+                        <span>Score</span>
+                        <strong id="score">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Lines</span>
+                        <strong id="lines">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Level</span>
+                        <strong id="level">1</strong>
+                    </div>
+
+                    <h3>Next</h3>
+                    <canvas id="next" width="120" height="120"></canvas>
+
+                    <h3>Controls</h3>
+                    <div class="controls">
+                        <span>← →</span> Move
+                        <span>↑</span> Rotate
+                        <span>↓</span> Soft drop
+                        <span>Space</span> Hard drop
+                        <span>P</span> Pause
+                    </div>
+
+                    <h3>Leaderboard</h3>
+                    <ol id="leaderboard"></ol>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>

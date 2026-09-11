@@ -1,4 +1,13 @@
-.venv/
+# Python
 __pycache__/
 *.pyc
+.venv/
+
+# Secrets - never commit real API keys
 .env
+
+# Generated processed datasets
+data/processed/
+
+# Generated reports
+outputs/reports/

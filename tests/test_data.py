@@ -1,4 +1,19 @@
+from src.ai_recommendation import _normalize_student_payload
 from src.risk_analysis import calculate_student_risk
+
+
+def test_normalize_student_payload_keeps_age_as_int():
+    payload = {
+        "age": "21.0",
+        "gender": "Female",
+        "course": "Computer Science",
+        "stress_level": 5,
+    }
+
+    normalized = _normalize_student_payload(payload)
+
+    assert isinstance(normalized["age"], int)
+    assert normalized["age"] == 21
 
 
 def test_calculate_student_risk_returns_low_for_healthy_profile():

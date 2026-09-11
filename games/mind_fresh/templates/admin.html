@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Akinator Admin</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .admin-container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .admin-card {
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            margin-bottom: 20px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-card h2 {
+            margin-bottom: 20px;
+        }
+
+        .admin-input {
+            width: 100%;
+
+            padding: 14px;
+
+            margin-bottom: 12px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+        }
+
+        .character-table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+        .character-table th,
+        .character-table td {
+            padding: 12px;
+
+            text-align: left;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back {
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            color: white;
+
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="app">
+
+        <header>
+
+            <div class="logo">
+                🧠 MindGuess Admin
+            </div>
+
+            <a href="/" class="admin-link">
+                Game
+            </a>
+
+        </header>
+
+
+        <section class="screen active">
+
+            <div class="admin-container">
+
+
+                <!-- ADD CHARACTER -->
+
+                <div class="admin-card">
+
+                    <h2>
+                        Add Character
+                    </h2>
+
+                    <input id="characterName" class="admin-input" placeholder="Character name">
+
+                    <input id="characterDescription" class="admin-input" placeholder="Description">
+
+                    <button id="addCharacter" class="primary-button">
+                        Add Character
+                    </button>
+
+                </div>
+
+
+                <!-- ADD QUESTION -->
+
+                <div class="admin-card">
+
+                    <h2>
+                        Add Question
+                    </h2>
+
+                    <input id="questionInput" class="admin-input" placeholder="Example: Is this person a doctor?">
+
+                    <button id="addQuestion" class="primary-button">
+                        Add Question
+                    </button>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+
+                <div class="admin-card">
+
+                    <h2>
+                        Database Statistics
+                    </h2>
+
+                    <p>
+                        Characters:
+                        <strong id="characterCount">
+                            0
+                        </strong>
+                    </p>
+
+                    <p>
+                        Questions:
+                        <strong id="questionCount">
+                            0
+                        </strong>
+                    </p>
+
+                    <p>
+                        Games:
+                        <strong id="gameCount">
+                            0
+                        </strong>
+                    </p>
+
+                    <p>
+                        Accuracy:
+                        <strong id="accuracy">
+                            0%
+                        </strong>
+                    </p>
+
+                </div>
+
+
+                <!-- CHARACTERS -->
+
+                <div class="admin-card">
+
+                    <h2>
+                        Characters
+                    </h2>
+
+                    <table class="character-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    ID
+                                </th>
+
+                                <th>
+                                    Name
+                                </th>
+
+                                <th>
+                                    Description
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="characterTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        async function loadCharacters() {
+
+            const response =
+                await fetch(
+                    "/api/admin/characters"
+                );
+
+            const characters =
+                await response.json();
+
+
+            const table =
+                document.getElementById(
+                    "characterTable"
+                );
+
+
+            table.innerHTML = "";
+
+
+            characters.forEach(
+                character => {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML = `
+
+                <td>
+                    ${character.id}
+                </td>
+
+                <td>
+                    ${character.name}
+                </td>
+
+                <td>
+                    ${character.description || ""}
+                </td>
+
+            `;
+
+
+                    table.appendChild(row);
+
+                }
+            );
+
+        }
+
+
+        async function loadStatistics() {
+
+            const response =
+                await fetch(
+                    "/api/statistics"
+                );
+
+
+            const data =
+                await response.json();
+
+
+            document.getElementById(
+                "characterCount"
+            ).textContent =
+                data.characters;
+
+
+            document.getElementById(
+                "questionCount"
+            ).textContent =
+                data.questions;
+
+
+            document.getElementById(
+                "gameCount"
+            ).textContent =
+                data.games;
+
+
+            document.getElementById(
+                "accuracy"
+            ).textContent =
+                `${data.accuracy}%`;
+
+        }
+
+
+        document.getElementById(
+            "addCharacter"
+        ).addEventListener(
+            "click",
+            async () => {
+
+                const name =
+                    document.getElementById(
+                        "characterName"
+                    ).value.trim();
+
+
+                const description =
+                    document.getElementById(
+                        "characterDescription"
+                    ).value.trim();
+
+
+                if (!name) {
+
+                    alert(
+                        "Enter character name"
+                    );
+
+                    return;
+                }
+
+
+                const response =
+                    await fetch(
+                        "/api/admin/character",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                name: name,
+                                description:
+                                    description
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.error) {
+
+                    alert(data.error);
+
+                    return;
+                }
+
+
+                alert(
+                    "Character added!"
+                );
+
+
+                document.getElementById(
+                    "characterName"
+                ).value = "";
+
+
+                document.getElementById(
+                    "characterDescription"
+                ).value = "";
+
+
+                loadCharacters();
+
+                loadStatistics();
+
+            }
+        );
+
+
+        document.getElementById(
+            "addQuestion"
+        ).addEventListener(
+            "click",
+            async () => {
+
+                const question =
+                    document.getElementById(
+                        "questionInput"
+                    ).value.trim();
+
+
+                if (!question) {
+
+                    alert(
+                        "Enter a question"
+                    );
+
+                    return;
+                }
+
+
+                const response =
+                    await fetch(
+                        "/api/admin/question",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                question: question
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.error) {
+
+                    alert(data.error);
+
+                    return;
+                }
+
+
+                alert(
+                    "Question added!"
+                );
+
+
+                document.getElementById(
+                    "questionInput"
+                ).value = "";
+
+
+                loadStatistics();
+
+            }
+        );
+
+
+        loadCharacters();
+
+        loadStatistics();
+
+    </script>
+
+</body>
+
+</html>

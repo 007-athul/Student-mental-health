@@ -161,10 +161,35 @@ def build_preprocessor(X):
     for feature in categorical_features:
         print(f"- {feature}")
 
+    
+    # --------------------------------------------------------
+    # CHECK SKEWNESS
+    # --------------------------------------------------------
+
+    skewness = X[numerical_features].skew()
+
+    print("\nNumerical feature skewness:")
+
+    for feature, value in skewness.items():
+
+        if abs(value) < 0.5:
+            interpretation = "Approximately symmetric"
+
+        elif abs(value) < 1:
+            interpretation = "Moderately skewed"
+
+        else:
+            interpretation = "Highly skewed"
+
+        print(
+            f"- {feature}: "
+            f"{value:.3f} -> {interpretation}"
+)
+
     # ----------------------------------------
     # NUMERICAL PIPELINE
     # ----------------------------------------
-
+    
     numerical_pipeline = Pipeline(
         steps=[
             (
@@ -306,7 +331,7 @@ def prepare_data():
 
         print(
             "\nMissing numerical values "
-            "will be imputed using the median."
+            "will be imputed using the mean/median."
         )
 
         print(

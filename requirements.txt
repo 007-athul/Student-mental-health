@@ -4,3 +4,20 @@ numpy>=1.24.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
 scipy>=1.10.0
+altair>=5.0.0
+
+# calibrated_stress_model.pkl was trained/pickled with scikit-learn 1.5.1.
+# Pin this version to avoid "Can't get attribute '_RemainderColsList'" /
+# InconsistentVersionWarning errors when unpickling it.
+scikit-learn==1.5.1
+
+# Voice/text intake -> AI recommendation pipeline
+python-dotenv>=1.0.0
+requests>=2.31.0
+google-genai>=0.3.0
+
+# Optional: only needed for audio transcription (main.py CLI). The app and
+# src/voice_intake.py import safely without these installed.
+assemblyai>=0.30.0
+websocket-client>=1.7.0
+pyaudio>=0.2.14
